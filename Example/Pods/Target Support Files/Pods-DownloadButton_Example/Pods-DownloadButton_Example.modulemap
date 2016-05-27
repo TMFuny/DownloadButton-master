@@ -1,0 +1,6 @@
+framework module Pods_DownloadButton_Example {
+  umbrella header "Pods-DownloadButton_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}
