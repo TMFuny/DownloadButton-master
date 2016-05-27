@@ -8,6 +8,9 @@
 
 #import "PKDownloadButton.h"
 #import "PKMacros.h"
+#import "PKStopDownloadButton.h"
+#import "PKPauseDownloadButton.h"
+#import "PKBorderedButton.h"
 #import "NSLayoutConstraint+PKDownloadButton.h"
 #import "UIImage+PKDownloadButton.h"
 #import "PKPendingView.h"
@@ -26,6 +29,7 @@ static NSDictionary *HighlitedTitleAttributes() {
 
 @property (nonatomic, weak) PKBorderedButton *startDownloadButton;
 @property (nonatomic, weak) PKStopDownloadButton *stopDownloadButton;
+@property (nonatomic, weak) PKPauseDownloadButton *pauseDownloadButton;
 @property (nonatomic, weak) PKBorderedButton *downloadedButton;
 @property (nonatomic, weak) PKPendingView *pendingView;
 
@@ -33,6 +37,7 @@ static NSDictionary *HighlitedTitleAttributes() {
 
 - (PKBorderedButton *)createStartDownloadButton;
 - (PKStopDownloadButton *)createStopDownloadButton;
+- (PKPauseDownloadButton *)createPauseDownloadButton;
 - (PKBorderedButton *)createDownloadedButton;
 - (PKPendingView *)createPendingView;
 
@@ -68,16 +73,26 @@ static PKDownloadButton *CommonInit(PKDownloadButton *self) {
     switch (state) {
         case kPKDownloadButtonState_StartDownload:
             self.startDownloadButton.hidden = NO;
+            NSLog(@"download state: StartDownLaod");
             break;
         case kPKDownloadButtonState_Pending:
             self.pendingView.hidden = NO;
+            NSLog(@"download state: Pending");
             break;
         case kPKDownloadButtonState_Downloading:
-            self.stopDownloadButton.hidden = NO;
-            self.stopDownloadButton.progress = 0.f;
+//            self.stopDownloadButton.hidden = NO;
+//            self.stopDownloadButton.progress = 0.f;
+            self.pauseDownloadButton.hidden = NO;
+            self.pauseDownloadButton.progress = 0.f;
+            NSLog(@"download state: downloading");
             break;
+        case kPKDownloadButtonState_Pausing:
+            self.startDownloadButton.hidden = NO;
+            NSLog(@"download state: Pausing");
+        break;
         case kPKDownloadButtonState_Downloaded:
             self.downloadedButton.hidden = NO;
+            NSLog(@"download state: Downloaded");
             break;
         default:
             NSAssert(NO, @"unsupported state");
@@ -98,8 +113,8 @@ static PKDownloadButton *CommonInit(PKDownloadButton *self) {
 - (void)tintColorDidChange {
 	[super tintColorDidChange];
 	
-	[self updateButton:self.startDownloadButton title:@"DOWNLOAD"];
-	[self updateButton:self.downloadedButton title:@"REMOVE"];
+	[self updateButton:self.startDownloadButton title:@"download"];
+	[self updateButton:self.downloadedButton title:@"open"];
 }
 
 
@@ -118,7 +133,7 @@ static PKDownloadButton *CommonInit(PKDownloadButton *self) {
     PKBorderedButton *startDownloadButton = [PKBorderedButton buttonWithType:UIButtonTypeCustom];
     [startDownloadButton configureDefaultAppearance];
     
-	[self updateButton:startDownloadButton title:@"DOWNLOAD"];
+	[self updateButton:startDownloadButton title:@"download"];
 	
     [startDownloadButton addTarget:self
                             action:@selector(currentButtonTapped:)
@@ -133,11 +148,18 @@ static PKDownloadButton *CommonInit(PKDownloadButton *self) {
     return stopDownloadButton;
 }
 
+- (PKPauseDownloadButton *)createPauseDownloadButton {
+    PKPauseDownloadButton *pauseDownloadButton = [[PKPauseDownloadButton alloc] init];
+    [pauseDownloadButton.pauseButton addTarget:self action:@selector(currentButtonTapped:)
+                              forControlEvents:UIControlEventTouchUpInside];
+    return pauseDownloadButton;
+}
+
 - (PKBorderedButton *)createDownloadedButton {
     PKBorderedButton *downloadedButton = [PKBorderedButton buttonWithType:UIButtonTypeCustom];
     [downloadedButton configureDefaultAppearance];
 
-	[self updateButton:downloadedButton title:@"REMOVE"];
+	[self updateButton:downloadedButton title:@"open"];
     
     [downloadedButton addTarget:self
                          action:@selector(currentButtonTapped:)
@@ -170,6 +192,12 @@ static PKDownloadButton *CommonInit(PKDownloadButton *self) {
     [self addSubview:stopDownloadButton];
     self.stopDownloadButton = stopDownloadButton;
     [self.stateViews addObject:stopDownloadButton];
+    
+    PKPauseDownloadButton *pauseDownloadButton = [self createPauseDownloadButton];
+    pauseDownloadButton.translatesAutoresizingMaskIntoConstraints = NO;
+    [self addSubview:pauseDownloadButton];
+    self.pauseDownloadButton = pauseDownloadButton;
+    [self.stateViews addObject:pauseDownloadButton];
     
     PKBorderedButton *downloadedButton = [self createDownloadedButton];
     downloadedButton.translatesAutoresizingMaskIntoConstraints = NO;

@@ -15,6 +15,7 @@ static double progressStep = 0.01;
 @property (strong) NSTimer *timer;
 @property (assign) volatile double progress;
 @property (assign) NSTimeInterval progressInterval;
+@property (assign) double pausingProgress;
 
 @end
 
@@ -44,6 +45,24 @@ static double progressStep = 0.01;
 - (void)cancelDownload {
     self.progress = 0.;
     [self.timer invalidate];
+}
+
+- (void)pauseDownload {
+    if (1. - self.progress > progressStep) {
+        self.pausingProgress = self.progress;
+        [self.timer invalidate];
+    } else {
+        [self cancelDownload];
+    }
+}
+
+- (void)continueDownload {
+    self.progress = self.pausingProgress;
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:self.progressInterval
+                                                 target:self
+                                               selector:@selector(increaseProgress)
+                                               userInfo:nil
+                                                repeats:YES];
 }
 
 - (void)increaseProgress {

@@ -24,5 +24,6 @@
 
 - (void)startDownload;
 - (void)cancelDownload;
-
+- (void)pauseDownload;
+- (void)continueDownload;
 @end

@@ -35,8 +35,12 @@
             self.downloadButton.state = kPKDownloadButtonState_StartDownload;
             break;
         case kPKDownloadButtonState_Downloading:
-            [self.downloaderSimulator cancelDownload];
-            self.downloadButton.state = kPKDownloadButtonState_StartDownload;
+            [self.downloaderSimulator pauseDownload];
+            self.downloadButton.state = kPKDownloadButtonState_Pausing;
+            break;
+            case kPKDownloadButtonState_Pausing:
+            [self.downloaderSimulator continueDownload];
+            self.downloadButton.state = kPKDownloadButtonState_Downloading;
             break;
         case kPKDownloadButtonState_Downloaded:
             self.downloadButton.state = kPKDownloadButtonState_StartDownload;
@@ -58,7 +62,7 @@
         }
     }
     else if (simulator == self.downloaderSimulator) {
-        self.downloadButton.stopDownloadButton.progress = progress;
+        self.downloadButton.pauseDownloadButton.progress = progress;
         if (progress == 1) {
             self.downloadButton.state = kPKDownloadButtonState_Downloaded;
             self.imageView.hidden = NO;
