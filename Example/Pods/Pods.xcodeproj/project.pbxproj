@@ -135,6 +135,8 @@
 		B3AC8129068E3988EEA87BC6638878F1 /* SPTExampleGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 707C1B7180164DF6560719973AEC92C1 /* SPTExampleGroup.m */; };
 		B6D9A9C41CF8347000CC9049 /* PKPauseDownloadButton.h in Headers */ = {isa = PBXBuildFile; fileRef = B6D9A9C21CF8347000CC9049 /* PKPauseDownloadButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B6D9A9C51CF8347000CC9049 /* PKPauseDownloadButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B6D9A9C31CF8347000CC9049 /* PKPauseDownloadButton.m */; };
+		B6F9C9041CFBDE6400DEE8CE /* PKDownloadingButton.h in Headers */ = {isa = PBXBuildFile; fileRef = B6F9C9021CFBDE6400DEE8CE /* PKDownloadingButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B6F9C9051CFBDE6400DEE8CE /* PKDownloadingButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B6F9C9031CFBDE6400DEE8CE /* PKDownloadingButton.m */; };
 		B7692288241D7A18AB59C8C5561AEAE2 /* PKCircleProgressView.h in Headers */ = {isa = PBXBuildFile; fileRef = 351DA99405B58DB14C0282D29E9D387F /* PKCircleProgressView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B84431CF8C64F363A334AA7089F6C134 /* NSValue+Expecta.m in Sources */ = {isa = PBXBuildFile; fileRef = 064D45869BC2F37AD341CBDE9F822387 /* NSValue+Expecta.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		BA12B131F10BCE3BE6E9A02FC908FE9D /* EXPMatchers+beCloseTo.m in Sources */ = {isa = PBXBuildFile; fileRef = D4EF39D56E8A55D649F9810E362FA318 /* EXPMatchers+beCloseTo.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -383,6 +385,8 @@
 		B647A866CAF55406F516ECE6F8AE7F8B /* EXPMatcher.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = EXPMatcher.h; path = Expecta/EXPMatcher.h; sourceTree = "<group>"; };
 		B6D9A9C21CF8347000CC9049 /* PKPauseDownloadButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKPauseDownloadButton.h; sourceTree = "<group>"; };
 		B6D9A9C31CF8347000CC9049 /* PKPauseDownloadButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKPauseDownloadButton.m; sourceTree = "<group>"; };
+		B6F9C9021CFBDE6400DEE8CE /* PKDownloadingButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKDownloadingButton.h; sourceTree = "<group>"; };
+		B6F9C9031CFBDE6400DEE8CE /* PKDownloadingButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKDownloadingButton.m; sourceTree = "<group>"; };
 		B7AD5E39AA1CC827314038CE034F691D /* FBSnapshotTestController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBSnapshotTestController.h; path = FBSnapshotTestCase/FBSnapshotTestController.h; sourceTree = "<group>"; };
 		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		BB4DC57B05E96C2EB152A59EFCDB6F12 /* EXPMatchers+beGreaterThanOrEqualTo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "EXPMatchers+beGreaterThanOrEqualTo.h"; path = "Expecta/Matchers/EXPMatchers+beGreaterThanOrEqualTo.h"; sourceTree = "<group>"; };
@@ -631,6 +635,8 @@
 				B6D9A9C31CF8347000CC9049 /* PKPauseDownloadButton.m */,
 				9E9499A3DECAA5C6A1A18516BAFEA778 /* UIImage+PKDownloadButton.h */,
 				5EE7B10BE6CA79E86C21BFAB17875949 /* UIImage+PKDownloadButton.m */,
+				B6F9C9021CFBDE6400DEE8CE /* PKDownloadingButton.h */,
+				B6F9C9031CFBDE6400DEE8CE /* PKDownloadingButton.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -966,6 +972,7 @@
 				00E27F389AD23550C61E3874874B9F13 /* PKMacros.h in Headers */,
 				D98D455AF6518B82D83567732CEF8EEE /* PKPendingView.h in Headers */,
 				AD8531ED280E52DFE83BB9C571BAB6D1 /* PKStopDownloadButton.h in Headers */,
+				B6F9C9041CFBDE6400DEE8CE /* PKDownloadingButton.h in Headers */,
 				29376A80B2587F99FF762BA5E1E5ADEB /* UIImage+PKDownloadButton.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1286,6 +1293,7 @@
 				3FBE828DF43E3503F70A6261941A0F57 /* PKCircleView.m in Sources */,
 				CDF8C7FA79AB37BB3B1878690B843213 /* PKDownloadButton.m in Sources */,
 				59F96026B80C5ABF9F04A8623C055FAE /* PKPendingView.m in Sources */,
+				B6F9C9051CFBDE6400DEE8CE /* PKDownloadingButton.m in Sources */,
 				2EED84D7A25DB97E23BFBF2DBE12EA36 /* PKStopDownloadButton.m in Sources */,
 				170894D3F54D16C475F766C16830B64A /* UIImage+PKDownloadButton.m in Sources */,
 			);

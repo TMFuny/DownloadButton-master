@@ -7,14 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-//@class PKStopDownloadButton,
-//PKPauseDownloadButton,
-//PKPendingView,
-//PKBorderedButton,
-//PKCircleProgressView;
 #import "PKStopDownloadButton.h"
 #import "PKPauseDownloadButton.h"
 #import "PKBorderedButton.h"
+#import "PKDownloadingButton.h"
 #import "PKCircleProgressView.h"
 #import "PKPendingView.h"
 
@@ -47,6 +43,7 @@ IB_DESIGNABLE
 @property (nonatomic, weak, readonly) PKBorderedButton *startDownloadButton;
 @property (nonatomic, weak, readonly) PKStopDownloadButton *stopDownloadButton;
 @property (nonatomic, weak, readonly) PKPauseDownloadButton *pauseDownloadButton;
+@property (nonatomic, weak, readonly) PKDownloadingButton *downloadingButton;
 @property (nonatomic, weak, readonly) PKBorderedButton *downloadedButton;
 @property (nonatomic, weak, readonly) PKPendingView *pendingView;
 

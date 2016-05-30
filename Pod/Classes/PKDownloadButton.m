@@ -31,6 +31,7 @@ static NSDictionary *HighlitedTitleAttributes() {
 @property (nonatomic, weak) PKStopDownloadButton *stopDownloadButton;
 @property (nonatomic, weak) PKPauseDownloadButton *pauseDownloadButton;
 @property (nonatomic, weak) PKBorderedButton *downloadedButton;
+@property (nonatomic, weak) PKDownloadingButton *downloadingButton;
 @property (nonatomic, weak) PKPendingView *pendingView;
 
 @property (nonatomic, strong) NSMutableArray *stateViews;
@@ -39,6 +40,7 @@ static NSDictionary *HighlitedTitleAttributes() {
 - (PKStopDownloadButton *)createStopDownloadButton;
 - (PKPauseDownloadButton *)createPauseDownloadButton;
 - (PKBorderedButton *)createDownloadedButton;
+- (PKDownloadingButton *)createDownloadingButton;
 - (PKPendingView *)createPendingView;
 
 - (void)currentButtonTapped:(id)sender;
@@ -80,14 +82,12 @@ static PKDownloadButton *CommonInit(PKDownloadButton *self) {
             NSLog(@"download state: Pending");
             break;
         case kPKDownloadButtonState_Downloading:
-//            self.stopDownloadButton.hidden = NO;
-//            self.stopDownloadButton.progress = 0.f;
-            self.pauseDownloadButton.hidden = NO;
-            self.pauseDownloadButton.progress = 0.f;
+            self.downloadingButton.hidden = NO;
+            self.downloadingButton.progress = 0.f;
             NSLog(@"download state: downloading");
             break;
         case kPKDownloadButtonState_Pausing:
-            self.startDownloadButton.hidden = NO;
+            self.pauseDownloadButton.hidden = NO;
             NSLog(@"download state: Pausing");
         break;
         case kPKDownloadButtonState_Downloaded:
@@ -143,14 +143,16 @@ static PKDownloadButton *CommonInit(PKDownloadButton *self) {
 
 - (PKStopDownloadButton *)createStopDownloadButton {
     PKStopDownloadButton *stopDownloadButton = [[PKStopDownloadButton alloc] init];
-    [stopDownloadButton.stopButton addTarget:self action:@selector(currentButtonTapped:)
+    [stopDownloadButton.stopButton addTarget:self
+                                      action:@selector(currentButtonTapped:)
                             forControlEvents:UIControlEventTouchUpInside];
     return stopDownloadButton;
 }
 
 - (PKPauseDownloadButton *)createPauseDownloadButton {
     PKPauseDownloadButton *pauseDownloadButton = [[PKPauseDownloadButton alloc] init];
-    [pauseDownloadButton.pauseButton addTarget:self action:@selector(currentButtonTapped:)
+    [pauseDownloadButton.pauseButton addTarget:self
+                                        action:@selector(currentButtonTapped:)
                               forControlEvents:UIControlEventTouchUpInside];
     return pauseDownloadButton;
 }
@@ -167,9 +169,18 @@ static PKDownloadButton *CommonInit(PKDownloadButton *self) {
     return downloadedButton;
 }
 
+- (PKDownloadingButton *)createDownloadingButton {
+    PKDownloadingButton *downloadingButton = [[PKDownloadingButton alloc] init];
+    [downloadingButton.downloadingButton addTarget:self
+                                            action:@selector(currentButtonTapped:)
+                                  forControlEvents:UIControlEventTouchUpInside];
+    return downloadingButton;
+}
 - (PKPendingView *)createPendingView {
     PKPendingView *pendingView = [[PKPendingView alloc] init];
-    [pendingView addTarget:self action:@selector(currentButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    [pendingView addTarget:self
+                    action:@selector(currentButtonTapped:)
+          forControlEvents:UIControlEventTouchUpInside];
     return pendingView;
 }
 
@@ -199,11 +210,19 @@ static PKDownloadButton *CommonInit(PKDownloadButton *self) {
     self.pauseDownloadButton = pauseDownloadButton;
     [self.stateViews addObject:pauseDownloadButton];
     
+    PKDownloadingButton *downloadingButton = [self createDownloadingButton];
+    downloadingButton.translatesAutoresizingMaskIntoConstraints = NO;
+    [self addSubview:downloadingButton];
+    self.downloadingButton = downloadingButton;
+    [self.stateViews addObject:downloadingButton];
+    
     PKBorderedButton *downloadedButton = [self createDownloadedButton];
     downloadedButton.translatesAutoresizingMaskIntoConstraints = NO;
     [self addSubview:downloadedButton];
     self.downloadedButton = downloadedButton;
     [self.stateViews addObject:downloadedButton];
+    
+    
     
     PKPendingView *pendingView = [self createPendingView];
     pendingView.translatesAutoresizingMaskIntoConstraints = NO;

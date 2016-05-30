@@ -26,16 +26,38 @@
     return image;
 }
 
-+ (UIImage *)pauseImageOfSize:(CGFloat)size color:(UIColor *)color {
++ (UIImage *)downloadingImageOfSize:(CGFloat)size color:(UIColor *)color {
     UIGraphicsBeginImageContextWithOptions(CGSizeMake(size, size), NO, 0.0f);
     
     CGContextRef context = UIGraphicsGetCurrentContext();
-    //FIX ME urgly code 
+    //FIX ME urgly code
     CGContextMoveToPoint(context, size/2-3, size/2-6);
     CGContextAddLineToPoint(context, size/2-3, size/2+6);
     
     CGContextMoveToPoint(context, size/2+3, size/2-6);
     CGContextAddLineToPoint(context, size/2+3, size/2+6);
+    
+    CGContextSetStrokeColorWithColor(context, color.CGColor);
+    CGContextStrokePath(context);
+    UIImage *pauseImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    return pauseImage;
+}
+
++ (UIImage *)pauseImageOfSize:(CGFloat)size color:(UIColor *)color {
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(size, size), NO, 0.0f);
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    //FIX ME urgly code
+    CGContextMoveToPoint(context, size/2, size/8);
+    CGContextAddLineToPoint(context, size/2, size*7/8);
+    
+    CGContextMoveToPoint(context, size/2, size*7/8);
+    CGContextAddLineToPoint(context, 0,size/2);
+    
+    CGContextMoveToPoint(context, size/2, size*7/8);
+    CGContextAddLineToPoint(context, size, size/2);
     
     CGContextSetStrokeColorWithColor(context, color.CGColor);
     CGContextStrokePath(context);

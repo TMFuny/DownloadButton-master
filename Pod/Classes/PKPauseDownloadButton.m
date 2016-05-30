@@ -10,7 +10,7 @@
 #import "NSLayoutConstraint+PKDownloadButton.h"
 #import "UIImage+PKDownloadButton.h"
 
-static const CGFloat kDefaultStopButtonWidth = 8.f;
+static const CGFloat kDefaultPauseButtonWidth = 8.f;
 
 @interface PKPauseDownloadButton ()
 
@@ -62,7 +62,7 @@ static PKPauseDownloadButton *CommonInit(PKPauseDownloadButton *self) {
 - (UIButton *)createPauseButton {
     UIButton *pauseButton = [UIButton buttonWithType:UIButtonTypeCustom];
     pauseButton.tintColor = [UIColor clearColor];
-    _pauseButtonWidth = kDefaultStopButtonWidth;
+    _pauseButtonWidth = kDefaultPauseButtonWidth;
     return pauseButton;
 }
 

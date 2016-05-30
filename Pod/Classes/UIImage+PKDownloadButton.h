@@ -11,6 +11,7 @@
 @interface UIImage (PKDownloadButton)
 
 + (UIImage *)stopImageOfSize:(CGFloat)size color:(UIColor *)color;
++ (UIImage *)downloadingImageOfSize:(CGFloat)size color:(UIColor *)color;
 + (UIImage *)pauseImageOfSize:(CGFloat)size color:(UIColor *)color;
 + (UIImage *)buttonBackgroundWithColor:(UIColor *)color;
 + (UIImage *)highlitedButtonBackgroundWithColor:(UIColor *)color;

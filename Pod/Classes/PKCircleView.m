@@ -62,7 +62,7 @@ static PKCircleView *CommonInit(PKCircleView *self) {
 #pragma mark - UIView
 
 - (void)drawRect:(CGRect)rect {
-    [self drawCircleRadius:MIN(rect.size.width / 2, rect.size.height / 2) - self.lineWidth / 2.f
+    [self drawCircleRadius:floorf(MIN(rect.size.width / 2, rect.size.height / 2) - self.lineWidth / 2.f)
                       rect:rect
                 startAngle:self.startAngleRadians
                   endAngle:self.endAngleRadians
