@@ -30,12 +30,11 @@
     UIGraphicsBeginImageContextWithOptions(CGSizeMake(size, size), NO, 0.0f);
     
     CGContextRef context = UIGraphicsGetCurrentContext();
-    //FIX ME urgly code
-    CGContextMoveToPoint(context, size/2-3, size/2-6);
-    CGContextAddLineToPoint(context, size/2-3, size/2+6);
+    CGContextMoveToPoint(context, 1, 0);
+    CGContextAddLineToPoint(context, 1, size);
     
-    CGContextMoveToPoint(context, size/2+3, size/2-6);
-    CGContextAddLineToPoint(context, size/2+3, size/2+6);
+    CGContextMoveToPoint(context, size-1, 0);
+    CGContextAddLineToPoint(context, size-1, size);
     
     CGContextSetStrokeColorWithColor(context, color.CGColor);
     CGContextStrokePath(context);
@@ -49,14 +48,13 @@
     UIGraphicsBeginImageContextWithOptions(CGSizeMake(size, size), NO, 0.0f);
     
     CGContextRef context = UIGraphicsGetCurrentContext();
-    //FIX ME urgly code
-    CGContextMoveToPoint(context, size/2, size/8);
-    CGContextAddLineToPoint(context, size/2, size*7/8);
+    CGContextMoveToPoint(context, size/2, 0);
+    CGContextAddLineToPoint(context, size/2, size);
     
-    CGContextMoveToPoint(context, size/2, size*7/8);
+    CGContextMoveToPoint(context, size/2, size);
     CGContextAddLineToPoint(context, 0,size/2);
     
-    CGContextMoveToPoint(context, size/2, size*7/8);
+    CGContextMoveToPoint(context, size/2, size);
     CGContextAddLineToPoint(context, size, size/2);
     
     CGContextSetStrokeColorWithColor(context, color.CGColor);
