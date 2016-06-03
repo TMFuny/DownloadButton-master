@@ -8,7 +8,7 @@
 
 #import "PKDownloaderSimulator.h"
 
-static double progressStep = 0.01;
+static double progressStep = 0.1;
 
 @interface PKDownloaderSimulator ()
 

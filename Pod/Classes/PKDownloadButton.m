@@ -75,6 +75,7 @@ static PKDownloadButton *CommonInit(PKDownloadButton *self) {
     switch (state) {
         case kPKDownloadButtonState_StartDownload:
             self.startDownloadButton.hidden = NO;
+            self.downloadingButton.progress = 0.f;
             NSLog(@"download state: StartDownLaod");
             break;
         case kPKDownloadButtonState_Pending:
@@ -83,7 +84,6 @@ static PKDownloadButton *CommonInit(PKDownloadButton *self) {
             break;
         case kPKDownloadButtonState_Downloading:
             self.downloadingButton.hidden = NO;
-            self.downloadingButton.progress = 0.f;
             NSLog(@"download state: downloading");
             break;
         case kPKDownloadButtonState_Pausing:
@@ -121,6 +121,9 @@ static PKDownloadButton *CommonInit(PKDownloadButton *self) {
 #pragma mark - appearance
 
 - (void)updateButton:(UIButton *)button title:(NSString *)title {
+    if (!title) {
+        NSAssert(NO, @"title string is nil");
+    }
 	NSAttributedString *attrTitle = [[NSAttributedString alloc] initWithString:title attributes:DefaultTitleAttributes(self.tintColor)];
 	[button setAttributedTitle:attrTitle forState:UIControlStateNormal];
 	NSAttributedString *highlitedTitle = [[NSAttributedString alloc] initWithString:title attributes:HighlitedTitleAttributes()];
